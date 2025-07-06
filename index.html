@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ZINZIYA Earth Movers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f3f3f3;
+      color: #333;
+    }
+
+    .jcb-header {
+      background: linear-gradient(to right, #f9c700, #f2a200);
+      padding: 40px 20px 60px;
+      text-align: center;
+      color: black;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 80% 100%, 20% 100%, 0 85%);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .jcb-header h1 {
+      font-size: 32px;
+      margin: 0;
+      font-weight: bold;
+      text-shadow: 1px 1px 0 #fff;
+    }
+
+    .jcb-header p {
+      font-size: 16px;
+      margin-top: 8px;
+      color: #333;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #f59e00;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      background: #f9a600;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e08700;
+    }
+
+    .whatsapp {
+      background: #25D366;
+      color: white;
+      text-align: center;
+      padding: 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    .whatsapp:hover {
+      background: #1eb75d;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 14px;
+    }
+
+    #owner-section {
+      display: none;
+      background: #fff8e1;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .booking-entry {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 12px;
+    }
+
+    .booking-entry strong {
+      font-size: 16px;
+      color: #222;
+    }
+
+    .booking-entry small {
+      color: #888;
+    }
+
+    .booking-number {
+      background: orange;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 6px;
+      margin-right: 6px;
+      font-size: 14px;
+    }
+
+    /* Slider styles */
+    #slider {
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    #slides {
+      white-space: nowrap;
+      transition: 0.8s;
+    }
+
+    #slides img {
+      width: 100%;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+<div class="jcb-header">
+  <h1>ZINZIYA EARTH MOVERS</h1>
+
+</div>
+
+<div class="container">
+
+  <!-- Image Slider Card -->
+  <div class="card">
+     <div id="slider">
+      <div id="slides">
+        <img src="https://i.postimg.cc/Pqkdz36z/Picsart-25-07-06-07-37-38-122.jpg" alt="Work 1">
+        <img src="https://i.postimg.cc/JzVf9ybR/Picsart-25-07-06-07-46-01-038.jpg" alt="Work 2">
+        <img src="https://i.postimg.cc/g041XN10/Picsart-25-07-06-07-48-55-725.jpg" alt="Work 3">
+      </div>
+    </div>
+  </div>
+
+  <!-- Our Services -->
+  <div class="card">
+    <h2>Our Services</h2>
+    <ul>
+      <li>EARTH MOVERS & ROAD LINES</li>
+     
+    </ul>
+  </div>
+
+  <!-- Booking -->
+  <div class="card">
+    <h2>Book a Service</h2>
+    <form id="bookingForm">
+      <input type="text" id="name" placeholder="Your full Name " required>
+      <input type="tel" id="phone" placeholder="Your Phone number" required>
+      <textarea id="location" placeholder="Work Location / Address must add Your Address" required></textarea>
+      <button type="submit">Submit Booking</button>
+    </form>
+    <a class="whatsapp" href="https://wa.me/+9198950 32319?text=name%20phone %20address" target="_blank">
+      📲 Book on WhatsApp
+    </a>
+  </div>
+
+  <!-- Owner Pin -->
+  <div class="card">
+    <h2>Owner Access 🔒</h2>
+    <input type="password" id="pinInput" placeholder="Enter Owner PIN">
+    <button onclick="checkPin()">Unlock Bookings</button>
+  </div>
+
+  <!-- Saved Bookings -->
+  <div class="card" id="owner-section">
+    <h2>Saved Bookings</h2>
+    <div id="bookings"></div>
+  </div>
+
+  <!-- Contact -->
+  <div class="card">
+    <h2>Contact</h2>
+    <p><strong>Phone:</strong> +919496362515</p>
+    
+    <p><strong>Based In:</strong> A.R.Nagar,  Malappuram, Kerala, India</p>
+  </div>
+
+</div>
+
+<footer>
+  © 2025 ZINZIYA Earth Movers. All Rights Reserved.
+</footer>
+
+<!-- Scripts -->
+<script>
+  // Slider
+  let slideIndex = 0;
+  const slides = document.getElementById("slides");
+  const totalSlides = slides.children.length;
+
+  setInterval(() => {
+    slideIndex = (slideIndex + 1) % totalSlides;
+    slides.style.transform = `translateX(-${slideIndex * 100}%)`;
+  }, 3000);
+
+  // Booking form save
+  document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const booking = {
+      name: document.getElementById('name').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      location: document.getElementById('location').value.trim(),
+      time: new Date().toLocaleString()
+    };
+    let bookings = JSON.parse(localStorage.getItem('zinziyaBookings')) || [];
+    bookings.push(booking);
+    localStorage.setItem('zinziyaBookings', JSON.stringify(bookings));
+    alert('Booking saved!');
+    this.reset();
+  });
+
+  // PIN check
+  function checkPin() {
+    const pin = document.getElementById('pinInput').value;
+    if (pin === '5667') {
+      document.getElementById('owner-section').style.display = 'block';
+      showBookings();
+    } else {
+      alert('Incorrect PIN');
+    }
+  }
+
+  // Display bookings
+  function showBookings() {
+    const list = document.getElementById('bookings');
+    list.innerHTML = '';
+    const bookings = JSON.parse(localStorage.getItem('zinziyaBookings')) || [];
+    if (bookings.length === 0) {
+      list.innerHTML = '<p>No bookings found.</p>';
+      return;
+    }
+    bookings.forEach((b, index) => {
+      list.innerHTML += `
+        <div class="booking-entry">
+          <span class="booking-number">#${index + 1}</span>
+          <strong>${b.name}</strong><br>
+          📞 ${b.phone}<br>
+          📍 ${b.location}<br>
+          <small>🕒 ${b.time}</small>
+        </div>`;
+    });
+  }
+</script>
+
+</body>
+</html>
